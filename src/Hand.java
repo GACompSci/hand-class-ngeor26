@@ -42,22 +42,21 @@ public class Hand {
     }
 
     public void sortHand() {
-        int n = hand.size();
-        boolean swapped;
-        for (int i = 0; i < n - 1; i++) {
-            swapped = false;
-            for (int j = 0; j < n - i - 1; j++) {
-                if (hand.get(j).getValue() > hand.get(j + 1).getValue()) {
-                    Card temp = hand.get(j);
-                    hand.set(j, hand.get(j + 1));
-                    hand.set(j + 1, temp);
-                    swapped = true;
+        for(int i = 0; i < hand.size(); i++){
+            int min = hand.get(i).getValue();
+            int minIndex = i;
+            for(int j = i + 1; j < hand.size(); j++){
+                if(hand.get(j).getValue() < min){
+                    min = hand.get(j).getValue();
+                    minIndex = j;
                 }
             }
 
-            // If no two elements were swapped, then break
-            if (!swapped)
-                break;
+            if(minIndex != i){
+                Card temp = hand.get(i);
+                hand.set(i, hand.get(minIndex));
+                hand.set(minIndex, temp);
+            }
         }
     }
 }
